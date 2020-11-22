@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
 //Iterate through them and for every book, create an li
 //li's textContent would be the books title
 //for every li there is an event listener for click --> goes to another function
-// apend that li to the ul with the id list
+// apend that li to the ul with the id "list"
 
 function getBooksArray(){
     return fetch("http://localhost:3000/books")
@@ -27,7 +27,8 @@ function eachBook(books){
         });
 }
 // get the div to append to
-//for each book, get the image(img), title, subtitle, author(h3), description(p), a (ul) to append to with an id and a list of users (li), a like (button)
+//for each book, get and create element for the following:
+//image(img), title, subtitle, author(h3), description(p), a (ul) to append to with an id and a list of users (li), a like (button)
 
 
 function showBook(book){
@@ -63,6 +64,7 @@ function showBook(book){
     })
 
     // if the users in this book has the user id of 1 then the button should be unlike otheriwse like
+    // button has an event listener go to another function
     
     likeBtn = document.createElement("button")
     likeBtn.addEventListener("click", (e) => likeBook(e, book))
@@ -81,7 +83,7 @@ function showBook(book){
 
 function likeBook(e, book){
 
-    // if the button is unlike then filter the users for this book without the user id of 1
+    // if the button's text content is UNLIKE then filter the users for this book without the user id of 1
 
     if (e.target.textContent == "UNLIKE"){
         let userArr = book.users.filter(user => user.id != 1)
@@ -103,7 +105,7 @@ function likeBook(e, book){
     else 
     {
         //else take the array of the users and add a hash for user id 1
-        
+
         let userArr = book.users 
         userArr.push({"id":1, "username":"pouros"})
         let formData = {users: userArr}
